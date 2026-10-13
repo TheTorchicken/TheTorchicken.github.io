@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tesla Authorization Code</title>
+<style>body{font-family:system-ui,sans-serif;max-width:900px;margin:40px auto;padding:0 16px;text-align:center}
+#code{font-size:2rem;font-family:monospace;word-break:break-all;background:#f2f2f2;padding:20px;border-radius:8px}
+button{font-size:1.3rem;padding:10px 24px;margin:16px;cursor:pointer}.muted{color:#666}</style></head>
+<body><h1>Paste this code back to your bot</h1>
+<div id="code">(no code found)</div>
+<button id="copy">Copy code</button><span id="msg"></span>
+<p class="muted">State: <span id="state"></span></p><p class="muted" id="err"></p>
+<script>
+var p=new URLSearchParams(location.search),c=p.get('code'),s=p.get('state'),e=p.get('error');
+if(c)document.getElementById('code').textContent=c;
+document.getElementById('state').textContent=s||'(none)';
+if(e)document.getElementById('err').textContent='Error: '+e+' '+(p.get('error_description')||'');
+document.getElementById('copy').onclick=function(){if(!c)return;var m=document.getElementById('msg');
+if(navigator.clipboard){navigator.clipboard.writeText(c).then(function(){m.textContent=' Copied!'},function(){f()})}else f();
+function f(){var t=document.createElement('textarea');t.value=c;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();m.textContent=' Copied!'}};
+</script></body></html>
